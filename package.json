@@ -1,5 +1,5 @@
 {
-  "name": "backend-hackaton-peru-elecciones",
+  "name": "backend-hackaton",
   "version": "0.1.0",
   "description": "Backend elecciones Perú 2026",
   "main": "src/servidor.js",
