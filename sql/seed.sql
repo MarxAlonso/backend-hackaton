@@ -1,0 +1,1 @@
+insert into regiones(nombre, tipo) values ('Nacional','nacional') on conflict do nothing;
