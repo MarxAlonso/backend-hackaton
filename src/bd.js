@@ -5,9 +5,13 @@ if (process.env.VERCEL === '1' || process.env.NEON_SERVERLESS === 'true')
 let pool = null;
 let sql = null;
 
-// Limpieza de comillas del .env (algunos editores añaden)
-const cadenaOriginal = process.env.BASENEON_URL || '';
-const cadena = cadenaOriginal.replace(/^['"]|['"]$/g, '');
+// En Vercel, se usa DATABASE_URL (conexión directa/no-pool).
+// Localmente, el usuario puede usar BASENEON_URL (conexión con pool).
+const cadenaCruda = usarNeon
+  ? process.env.DATABASE_URL
+  : process.env.BASENEON_URL;
+
+const cadena = (cadenaCruda || '').replace(/^['"]|['"]$/g, '');
 
 if (usarNeon) {
   const { neon } = require('@neondatabase/serverless');
