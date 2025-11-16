@@ -1,22 +1,15 @@
 {
   "name": "backend-hackaton",
-  "version": "0.1.0",
-  "description": "Backend elecciones Perú 2026",
-  "main": "api/index.js",
+  "version": "1.0.0",
+  "main": "src/serverless.js",
   "scripts": {
-    "start": "node src/servidor.js"
+    "dev": "node src/app.js",
+    "start": "node src/app.js"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "commonjs",
   "dependencies": {
-    "@neondatabase/serverless": "^1.0.2",
-    "cheerio": "^1.0.0",
+    "@neondatabase/serverless": "^1.0.0",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
-    "express": "^4.18.2",
-    "node-fetch": "^2.6.7",
-    "pg": "^8.11.3"
+    "express": "^4.18.2"
   }
 }

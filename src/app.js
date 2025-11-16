@@ -1,39 +1,28 @@
-const express = require('express')
-const cors = require('cors')
-const { pool, consultar } = require('./bd')
-const { iniciarBD } = require('./bd/inicializacion')
-const candidatos = require('./rutas/candidatos')
-const partidos = require('./rutas/partidos')
-const planchas = require('./rutas/planchas')
-const planes = require('./rutas/planes')
-const candidaturas = require('./rutas/candidaturas')
-const noticias = require('./rutas/noticias')
+const express = require("express");
+const cors = require("cors");
 
-function crearApp() {
-  const app = express()
-  app.use(cors())
-  app.use(express.json())
+const partidosRoutes = require("./routes/partidos.routes");
+const candidatosRoutes = require("./routes/candidatos.routes");
+const planchasRoutes = require("./routes/planchas.routes");
+const perfilesRoutes = require("./routes/perfiles.routes");
+const propuestasRoutes = require("./routes/propuestas.routes");
+const noticiasRoutes = require("./routes/noticias.routes");
+const regionesRoutes = require("./routes/regiones.routes");
 
-  app.get('/salud', async (req, res) => {
-    let bd_conectada = false
-    try {
-      if (pool) await pool.query('select 1')
-      else await consultar('select 1')
-      bd_conectada = true
-    } catch (e) {
-      console.error("ERROR BD /salud:", e.message)
-    }
-    res.json({ ok: true, bd_conectada })
-  })
+const app = express();
+app.use(cors());
+app.use(express.json());
 
-  app.use('/candidatos', candidatos)
-  app.use('/partidos', partidos)
-  app.use('/planchas', planchas)
-  app.use('/planes', planes)
-  app.use('/candidaturas', candidaturas)
-  app.use('/noticias', noticias)
+app.use("/partidos", partidosRoutes);
+app.use("/candidatos", candidatosRoutes);
+app.use("/planchas", planchasRoutes);
+app.use("/perfiles", perfilesRoutes);
+app.use("/propuestas", propuestasRoutes);
+app.use("/noticias", noticiasRoutes);
+app.use("/regiones", regionesRoutes);
 
-  return app
-}
+app.get("/", (req, res) => {
+  res.json({ ok: true, message: "API Elecciones 2026 — backend listo" });
+});
 
-module.exports = { crearApp }
+module.exports = app;
